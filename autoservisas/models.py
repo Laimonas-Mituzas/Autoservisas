@@ -27,7 +27,7 @@ class Order(models.Model):
     #     return sum(line.line_sum() for line in self.orderline_set.all())
 
     def total(self):
-        return sum(line.lin_sum() for line in self.line.all())
+        return sum(line.line_sum() for line in self.lines.all())
 
 
     def __str__(self):
@@ -43,8 +43,8 @@ class OrderLine(models.Model):
         verbose_name = "Order Line",
         verbose_name_plural = "Oder Lines"
 
-    def lin_sum(self):
-        return self.servie.price * self.quantity
+    def line_sum(self):
+        return self.service.price * self.quantity
 
     def __str__(self):
         return f"{self.service.name} ({self.service.price}) - {self.quantity}"
