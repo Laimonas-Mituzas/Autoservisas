@@ -23,18 +23,28 @@ class Order(models.Model):
         verbose_name = "Order",
         verbose_name_plural = "Orders"
 
+    # def total(self):
+    #     return sum(line.line_sum() for line in self.orderline_set.all())
+
+    def total(self):
+        return sum(line.lin_sum() for line in self.line.all())
+
+
     def __str__(self):
-        return f"{self.car}: ({self.date})"
+        return f"{self.car}: ({self.date}) - {self.total()}"
 
 # Remonto darbu modelis
 class OrderLine(models.Model):
-    order = models.ForeignKey(to="Order", verbose_name="Uzsakymas", on_delete=models.CASCADE, null=True )
+    order = models.ForeignKey(to="Order", verbose_name="Uzsakymas", on_delete=models.CASCADE, null=True, related_name='lines' )
     service = models.ForeignKey(to="Service", verbose_name="Paslauga", on_delete=models.SET_NULL, null=True )
     quantity = models.IntegerField(verbose_name="Kiekis")
 
     class Meta:
         verbose_name = "Order Line",
         verbose_name_plural = "Oder Lines"
+
+    def lin_sum(self):
+        return self.servie.price * self.quantity
 
     def __str__(self):
         return f"{self.service.name} ({self.service.price}) - {self.quantity}"
