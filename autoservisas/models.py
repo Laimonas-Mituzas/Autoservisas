@@ -12,7 +12,7 @@ class Car(models.Model):
         verbose_name_plural = "Cars"
 
     def __str__(self):
-        return f"{self.license_plate} - {self.model} - {self.client_name}"
+        return f"{self.license_plate} - {self.make} - {self.client_name}"
 
 
 class Order(models.Model):
@@ -22,6 +22,17 @@ class Order(models.Model):
     class Meta:
         verbose_name = "Order",
         verbose_name_plural = "Orders"
+
+    ORDER_STATUS =(
+        ('n', 'New'),
+        ('p', 'Parts ordered' ),
+        ('h', 'Hold'),
+        ('i', 'In progress'),
+        ('d', 'Done'),
+        ('f', 'Money recieved'),
+    )
+
+    status = models.CharField(verbose_name="Status", max_length=1, choices=ORDER_STATUS, blank=True, default='n')
 
     # def total(self):
     #     return sum(line.line_sum() for line in self.orderline_set.all())
