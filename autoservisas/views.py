@@ -11,3 +11,10 @@ def index(request):
     }
 
     return render(request, template_name="index.html", context=context)
+
+
+def dashboard(request):
+    context = {
+        'cars': Car.objects.all(),
+    }
+    return render(request, template_name="dash.html", context=context)
