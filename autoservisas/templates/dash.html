@@ -3,7 +3,7 @@
 {% block cars_in_service %}
 <h2 class="mt-4"> Šiuo metu autoservise aptarnaujamos mašinos</h2>
 {% for car in cars %}
-<p>{{car.make}} {{car.model}} - {{car.license_plate}} - {{car.client_name}}</p>
+<p><a href="{% url 'car' car.pk %}">{{car.make}} {{car.model}} - {{car.client_name}}</a></p>
 {% endfor %}
 
 {% endblock %}

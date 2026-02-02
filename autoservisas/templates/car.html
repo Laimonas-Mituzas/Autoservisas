@@ -1,0 +1,10 @@
+{% extends "dashboard.html" %}
+
+{% block car_in_service %}
+<h2 class="mt-4"> Šiuo metu autoservise aptarnaujamos mašinos</h2>
+
+<p>{{car.make}} {{car.model}} - {{car.license_plate}} - {{car.client_name}}</p>
+
+
+{% endblock %}
+

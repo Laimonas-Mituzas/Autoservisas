@@ -18,3 +18,11 @@ def dashboard(request):
         'cars': Car.objects.all(),
     }
     return render(request, template_name="dash.html", context=context)
+
+def car(request, car_id):
+    # car = Car.objects.get(pk=car_id)
+    context = {
+        'cars': Car.objects.all(),
+        'car': Car.objects.get(pk=car_id)
+    }
+    return render(request, template_name="car.html", context=context)
