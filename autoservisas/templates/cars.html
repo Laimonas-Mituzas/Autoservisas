@@ -1,10 +1,18 @@
 {% extends "dashboard.html" %}
 
-{% block content %}
+{% block heading %}
+
 <h2 class="mt-4"> Šiuo metu autoservise aptarnaujamos mašinos</h2>
 <p></p>
+
+{% endblock %}
+
+
+{% block content %}
+
 {% for car in cars %}
 <p><a href="{% url 'car' car.pk %}">{{car.make}} {{car.model}} - {{car.client_name}}</a></p>
+<hr>
 {% endfor %}
 
 {% endblock %}

@@ -1,15 +1,24 @@
 {% extends "dashboard.html" %}
 
-{% block car_in_service %}
+
+{% block heading %}
 <h2 class="mt-4">{{car.make}} {{car.model}} automobilio informacija</h2>
 <p></p>
-<p> {{car.client_name}}</p>
-<p>{{car.license_plate}} </p>
-<p>{{car.vin_code}}</p>
+{% endblock %}
 
 
+{% block content %}
+<p></p>
+<p> Klients: {{car.client_name}}</p>
+<p>Numeris: {{car.license_plate}} </p>
+<p>Kėbulo numeris:  {{car.vin_code}}</p>
 
-
+<h3>Taisymai</h3>
+{% for order in car.order.all %}
+<p><a href="{% url 'order' order.pk %}">{{order.date}}</a></p>
+{% empty %}
+<p>Nebuvo ankstesniu taisymu</p>
+{% endfor %}
 
 {% endblock %}
 

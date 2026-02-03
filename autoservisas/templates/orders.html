@@ -1,9 +1,22 @@
 {% extends "dashboard.html" %}
 
-{% block content %}
-<h2 class="mt-4"> Užsakymai</h2>
+{% block heading %}
+
+<h2 class="mt-4">Taisymai</h2>
 <p></p>
 
+{% endblock %}
+
+
+
+{% block content %}
+
+{% for order in orders %}
+<!--<p><a href="">{{order.service}} {{order.quantity}} - {{order.price}}</a></p>-->
+<p><a href="{% url 'order' order.pk %}">{{order}}</a></p>
+<!--<p><a href="{{order.pk}}">{{order}}</a></p>-->
+<hr>
+{% endfor %}
 
 {% endblock %}
 

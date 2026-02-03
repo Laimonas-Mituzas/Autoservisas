@@ -33,11 +33,11 @@ def cars(request):
 def car(request, car_id):
     return render(request, template_name="car.html", context={'car': Car.objects.get(pk=car_id)})
 
+# Order listas
 class OrderListView(generic.ListView):
     model = Order
     template_name = 'orders.html'
     context_object_name = 'orders'
-
 
 class OrderDetailView(generic.DetailView):
     model = Order
