@@ -1,0 +1,23 @@
+{% extends "dashboard.html" %}
+
+
+{% block heading %}
+<h2 class="mt-4">Paieškos rezultatai</h2>
+<p></p>
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Rasta pagal paiešką "{{ query }}":</h1>
+<br>
+{% if car %}
+{% for i in car %}
+<p><a href="{% url 'i' i.pk %}">{{ i }}</a></p>
+{% endfor %}
+{% else %}
+<p>Oops. Nieko nerasta</p>
+{% endif %}
+
+{% endblock %}
+

@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import Car, Order, OrderLine, Service
 from django.views import generic
 from django.core.paginator import Paginator
+from django.db.models import Q
+
 
 def index(request):
     context = {
@@ -51,3 +53,13 @@ class OrderDetailView(generic.DetailView):
     template_name = 'order.html'
     context_object_name = 'order'
 
+def search(request):
+    query = request.GET.get('query')
+    car_search_results = Car.objects.filter(
+        Q(make__icontains=query) | Q(model__icontains=query) | Q(license_palte__icontains=query) | Q(
+            vin_code__icontains=query) | Q(client_name__icontains=query))
+    context = {
+        "query": query,
+        "car": car_search_results,
+    }
+    return render(request, template_name="search.html", context=context)
