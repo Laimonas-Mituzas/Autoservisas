@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Car, Order, OrderLine, Service
 from django.views import generic
+from django.core.paginator import Paginator
 
 def index(request):
     context = {
@@ -27,7 +28,12 @@ def dashboard(request):
 
 
 def cars(request):
-    return render(request, template_name="cars.html", context={'cars': Car.objects.all()})
+    cars = Car.objects.all()
+    paginator = Paginator(cars, 3)
+    page_number = request.GET.get('page')
+    paged_cars = paginator.get_page(page_number)
+    return render(request, template_name="cars.html", context={'cars': paged_cars})
+    # return render(request, template_name="cars.html", context={'cars': Car.objects.all()})
 
 
 def car(request, car_id):
