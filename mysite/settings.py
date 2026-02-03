@@ -122,3 +122,6 @@ STATIC_URL = 'static/'
 #     BASE_DIR / "static",
 #     "/var/www/static/",
 # ]
+# media folder settings
+MEDIA_ROOT = os.path.join(BASE_DIR, 'autoservisas/media')
+MEDIA_URL = '/media/'

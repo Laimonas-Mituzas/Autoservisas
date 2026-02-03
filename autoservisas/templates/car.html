@@ -8,10 +8,16 @@
 
 
 {% block content %}
+{% load static %}
+
+{% if car.car_pic %}
+<img class="card-img-top mb-3" style="max-width: 300px" src="{{ car.car_pic.url }}">
+{% endif %}
+
 <p></p>
-<p> Klients: {{car.client_name}}</p>
-<p>Numeris: {{car.license_plate}} </p>
-<p>Kėbulo numeris:  {{car.vin_code}}</p>
+<p><strong>Klients:</strong> {{car.client_name}}</p>
+<p><strong>Numeris:</strong> {{car.license_plate}} </p>
+<p><strong>Kėbulo numeris:</strong>  {{car.vin_code}}</p>
 
 <h3>Taisymai</h3>
 {% for order in car.order.all %}

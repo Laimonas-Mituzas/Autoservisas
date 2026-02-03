@@ -6,6 +6,7 @@ class Car(models.Model):
     license_plate = models.CharField(verbose_name="Numeris", max_length=100)
     vin_code = models.CharField(verbose_name="VIN", max_length=100)
     client_name = models.CharField(verbose_name="Klientas", max_length=100)
+    car_pic = models.ImageField('Auto priemonė', upload_to='car_pics', null=True, blank=True)
 
     class Meta:
         verbose_name = "Car",

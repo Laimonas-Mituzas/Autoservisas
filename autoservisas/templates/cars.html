@@ -9,9 +9,19 @@
 
 
 {% block content %}
+{% load static %}
 
 {% for car in cars %}
-<p><a href="{% url 'car' car.pk %}">{{car.make}} {{car.model}} - {{car.client_name}}</a></p>
+<div>
+    <div class="card mb-4 shadow-sm" style="width:200px">
+            {% if car.car_pic %}
+            <img src="{{ car.car_pic.url }}" class="card-img-top" alt="...">
+            {% else %}
+            <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+            {% endif %}
+      </div>
+    <a href="{% url 'car' car.pk %}">{{car.make}} {{car.model}} - {{car.client_name}}</a>
+</div>
 <hr>
 {% endfor %}
 
