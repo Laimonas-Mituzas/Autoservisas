@@ -1,9 +1,14 @@
 {% extends "dashboard.html" %}
 
 {% block car_in_service %}
-<h2 class="mt-4"> Šiuo metu autoservise aptarnaujamos mašinos</h2>
+<h2 class="mt-4">{{car.make}} {{car.model}} automobilio informacija</h2>
+<p></p>
+<p> {{car.client_name}}</p>
+<p>{{car.license_plate}} </p>
+<p>{{car.vin_code}}</p>
 
-<p>{{car.make}} {{car.model}} - {{car.license_plate}} - {{car.client_name}}</p>
+
+
 
 
 {% endblock %}

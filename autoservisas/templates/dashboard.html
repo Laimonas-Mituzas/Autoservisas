@@ -17,7 +17,11 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+<!--            <a class="navbar-brand ps-3" href="{% url 'dashboard' %}">Skydelis</a>-->
+            <a class="navbar-brand ps-3" href="{% url 'dashboard' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Skydelis
+                            </a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
 
@@ -55,11 +59,19 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="{% url 'dashboard' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
+                                Skydelis
                             </a>
                             <div class="sb-sidenav-menu-heading">Interface</div>
+                            <a class="nav-link cars-link" href="{% url 'cars' %}">
+                                <div class="sb-nav-link-icon"><i class="bi bi-car-front"></i></div>
+                                Automobiliai
+                            </a>
+                            <a class="nav-link orders-link" href="{% url 'orders' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Taisymai
+                            </a>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Layouts
@@ -128,8 +140,8 @@
 <!--                        </ol>-->
 
                         <div class="row">
-                        {% block cars_in_service %} {% endblock %}
-                        {% block car_in_service %} {% endblock %}
+                        {% block content%} {% endblock %}
+
 
 
                         </div>

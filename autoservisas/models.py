@@ -17,7 +17,12 @@ class Car(models.Model):
 
 class Order(models.Model):
     date = models.DateTimeField(verbose_name="Data", auto_now_add=True, max_length=10)
-    car = models.ForeignKey(to="Car", verbose_name="Auto", on_delete=models.SET_NULL, null=True, blank=True )
+    car = models.ForeignKey(to="Car",
+                            verbose_name="Auto",
+                            on_delete=models.SET_NULL,
+                            null=True,
+                            blank=True,
+                            related_name='orders' )
 
     class Meta:
         verbose_name = "Order",

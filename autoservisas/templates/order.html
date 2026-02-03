@@ -1,0 +1,61 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+<h2 class="mt-4"> Užsakymas</h2>
+<p></p>
+
+<p>Automobilis: </p>
+{{order.date}} - {{order.get_status}}
+
+<div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                DataTable Example
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+
+                                        </tr>
+                                    </thead>
+<!--                                    <tfoot>-->
+<!--                                        <tr>-->
+<!--                                            <th>Name</th>-->
+<!--                                            <th>Position</th>-->
+<!--                                            <th>Office</th>-->
+<!--                                            <th>Age</th>-->
+<!--                                            <th>Start date</th>-->
+<!--                                            <th>Salary</th>-->
+<!--                                        </tr>-->
+<!--                                    </tfoot>-->
+                                    <tbody>
+
+                                    {% for line in order.lines %}
+                                        <tr>
+                                            <td>{{ line.sevice.name }}</td>
+                                            <td>{{ line.service.price}}</td>
+                                            <td>{{ line.quantity}}</td>
+                                            <td>{{ line.line_sum}}</td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    <tr>
+                                        <td colspan="3">BENDRA SUMA:</td>
+                                        <td>{{order.total}}</td>
+                                    </tr>
+
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+{% endblock %}
+
