@@ -11,9 +11,9 @@
 
 <h1>Rasta pagal paiešką "{{ query }}":</h1>
 <br>
-{% if car %}
-{% for i in car %}
-<p><a href="{% url 'i' i.pk %}">{{ i }}</a></p>
+{% if cars %}
+{% for car in cars %}
+<p><a href="{% url 'car' car.pk %}">{{ car }}</a></p>
 {% endfor %}
 {% else %}
 <p>Oops. Nieko nerasta</p>

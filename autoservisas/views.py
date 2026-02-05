@@ -7,18 +7,15 @@ from django.db.models import Q
 
 
 def index(request):
-    context = {
-        'cars': Car.objects.all(),
-    }
-
-def index(request):
-
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
     context = {
         'num_services': Service.objects.count(),
         'num_cars': Car.objects.all().count(),
         'num_orders': Order.objects.all().count(),
-    }
+        'num_visits': num_visits,
 
+    }
     return render(request, template_name="index.html", context=context)
 
 
@@ -55,11 +52,13 @@ class OrderDetailView(generic.DetailView):
 
 def search(request):
     query = request.GET.get('query')
-    car_search_results = Car.objects.filter(
-        Q(make__icontains=query) | Q(model__icontains=query) | Q(license_palte__icontains=query) | Q(
-            vin_code__icontains=query) | Q(client_name__icontains=query))
+    car_search_results = Car.objects.filter(Q(make__icontains=query) |
+                                            Q(model__icontains=query) |
+                                            Q(license_palte__icontains=query) |
+                                            Q(vin_code__icontains=query) |
+                                            Q(client_name__icontains=query))
     context = {
         "query": query,
-        "car": car_search_results,
+        "cars": car_search_results,
     }
     return render(request, template_name="search.html", context=context)

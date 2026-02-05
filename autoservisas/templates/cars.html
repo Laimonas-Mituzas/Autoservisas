@@ -12,22 +12,24 @@
 {% load static %}
 
 {% for car in cars %}
-<div>
+<div class="col-md-4 d-flex align-items-stretch">
     <div class="card mb-4 shadow-sm" style="width:200px">
             {% if car.car_pic %}
             <img src="{{ car.car_pic.url }}" class="card-img-top" alt="...">
             {% else %}
             <img src="{% static 'img/no-image.png' %}" class="card-img-top">
             {% endif %}
+        <div class="card-body">
+            <a href="{% url 'car' car.pk %}">{{car.make}} {{car.model}} - {{car.client_name}}</a>
+            </div>
       </div>
-    <a href="{% url 'car' car.pk %}">{{car.make}} {{car.model}} - {{car.client_name}}</a>
+
 </div>
-<hr>
 {% endfor %}
 
+
 {% if cars.has_other_pages %}
-<div class="container">
-    <nav aria-label="...">
+
             <ul class="pagination pagination-sm justify-content-center">
                 {% for i in cars.paginator.page_range %}
                     {% if cars.number == i %}
@@ -41,8 +43,7 @@
                     {% endif %}
                 {% endfor %}
             </ul>
-    </nav>
-</div>
+
 {% endif %}
 
 {% endblock %}
