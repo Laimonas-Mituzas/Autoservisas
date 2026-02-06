@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.utils import timezone
+
 
 class Car(models.Model):
     make = models.CharField(verbose_name = "Markė", max_length=100)
@@ -18,6 +21,7 @@ class Car(models.Model):
 
 class Order(models.Model):
     date = models.DateTimeField(verbose_name="Data", auto_now_add=True, max_length=10)
+    reader = models.ForeignKey(to=User, verbose_name="Reader", on_delete=models.SET_NULL, null=True, blank=True)
     car = models.ForeignKey(to="Car",
                             verbose_name="Auto",
                             on_delete=models.SET_NULL,
@@ -42,6 +46,9 @@ class Order(models.Model):
 
     # def total(self):
     #     return sum(line.line_sum() for line in self.orderline_set.all())
+
+    def is_overdue(self):
+        return self.due_back and timezone.now().date() > self.due_back
 
     def total(self):
         return sum(line.line_sum() for line in self.lines.all())

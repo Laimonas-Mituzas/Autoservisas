@@ -7,23 +7,25 @@ from django.db.models import Q
 
 
 def index(request):
-    num_visits = request.session.get('num_visits', 1)
-    request.session['num_visits'] = num_visits + 1
+
     context = {
         'num_services': Service.objects.count(),
         'num_cars': Car.objects.all().count(),
         'num_orders': Order.objects.all().count(),
-        'num_visits': num_visits,
+
 
     }
     return render(request, template_name="index.html", context=context)
 
 
 def dashboard(request):
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
     context = {
         'cars': Car.objects.all(),
+        'num_visits': num_visits,
     }
-    return render(request, template_name="cars.html", context=context)
+    return render(request, template_name="dash.html", context=context)
 
 
 def cars(request):
@@ -54,7 +56,7 @@ def search(request):
     query = request.GET.get('query')
     car_search_results = Car.objects.filter(Q(make__icontains=query) |
                                             Q(model__icontains=query) |
-                                            Q(license_palte__icontains=query) |
+                                            Q(license_plate__icontains=query) |
                                             Q(vin_code__icontains=query) |
                                             Q(client_name__icontains=query))
     context = {

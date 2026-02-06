@@ -35,7 +35,8 @@
 
             <!-- Navbar Search-->
 
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" id="search-bar">
+
+            <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" id="search-bar">
 
                 <div class="input-group">
                     <form action="{% url 'search' %}" method="GET">
@@ -43,18 +44,20 @@
 <!--                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>-->
                     </form>
                 </div>
-            </form>
+            </div>
 
-            <div class="d-inline mx-4" id="user-name" style="color:#fff;">User name</div>
+            <div class="d-inline mx-4" id="user-name" style="color:#fff;">
+                {% if user.is_authenticated %}
+                {{ user.get_username }}
+                {% endif %}
+
+            </div>
 
             <!-- Login Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-6 login">
 
                 <li class="nav-item dropdown">
-                    {% if user.is_authenticated %}
-                    {{ user.get_username }}
-                    {% endif %}
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                   <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user fa-fw"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -62,10 +65,14 @@
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         {% if user.is_authenticated %}
+                        <li>
+<form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
-                        <li><a class="dropdown-item" href="#!" type="submit" action="{% url 'logout' %}">Logout</a></li>
+                        <button class="dropdown-item"  type="submit" >Logout</button>
+</form>
+                        </li>
                         {% else %}
-                        <li><a class="dropdown-item" href="{% url 'login'%}">Login</a></li>
+                        <li><a class="dropdown-item" type="submit" href="{% url 'login'%}">Login</a></li>
                         {% endif %}
                     </ul>
                 </li>
@@ -81,6 +88,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Skydelis
                             </a>
+                            <a class="nav-link orders-link" href="{% url 'orders' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Mano uzsakymai
+                            </a>
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link cars-link" href="{% url 'cars' %}">
                                 <div class="sb-nav-link-icon"><i class="bi bi-car-front"></i></div>
@@ -90,6 +101,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Taisymai
                             </a>
+
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Layouts
